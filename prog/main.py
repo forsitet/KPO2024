@@ -34,8 +34,8 @@ def get_group_members_with_birthdays():
     return(birthdays)
 
 
-def post_birthday_congratulations():
-    birthdays = get_group_members_with_birthdays()
+def post_birthday_congratulations(birthdays, no_test = 1):
+    
     method_api = "wall.post"
     url = url_global + method_api
     message = ""
@@ -43,8 +43,11 @@ def post_birthday_congratulations():
         if birthdays:
             for member in birthdays:
                 message += "🎉 Сегодня день рождения у: \n" + f"@id{member["id"]}({member["name"]})" +  "\n\nПоздравляем! 🥳"
-                params = {"owner_id": "-"+ GROUP_ID, "v": version, "message":message, "publish_date": "1732860000", "access_token": TOKEN}
-            response = requests.get(url, params).json()
+                params = {"owner_id": "-"+ GROUP_ID, "v": version, "message":message, "publish_date": "1735624800", "access_token": TOKEN}
+            if no_test:
+                response = requests.get(url, params).json()
+            else:
+                response = {'response': {'post_id': "test"}}
             
         else:
             response = "Сегодня именинников нет."
@@ -55,5 +58,6 @@ def post_birthday_congratulations():
 # schedule.every().day.at("12:00").do(post_birthday_congratulations)
 # while True:
 #     schedule.run_pending()
-
-post_birthday_congratulations()
+if __name__ == "__main__":
+    birthdays = get_group_members_with_birthdays()
+    post_birthday_congratulations(birthdays)
