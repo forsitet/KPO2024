@@ -18,7 +18,6 @@ COPY vikhr-llama3.1-8b-instruct-r-21-09-24-q4_k_m.gguf /app
 
 EXPOSE 8000
 
-COPY model.py /app
 COPY model_langchain.py /app
 
 CMD ["uvicorn", "model_langchain:app", "--host", "0.0.0.0", "--port", "8000"]

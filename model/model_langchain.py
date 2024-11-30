@@ -22,14 +22,6 @@ model = LlamaCpp(
 
 app = FastAPI()
 
-@app.middleware("http")
-async def log_execution_time(request: Request, call_next):
-    start_time = time.time()
-    response = await call_next(request)
-    execution_time = time.time() - start_time
-    print(f"Запрос {request.url.path} выполнен за {execution_time:.4f} секунд.")
-    return response
-
 class Query(BaseModel):
     person_data: str
 

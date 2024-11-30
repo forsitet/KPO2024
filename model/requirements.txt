@@ -1,9 +1,4 @@
 fastapi
-transformers
-torch
-scikit-learn
-pandas
-langchain
 uvicorn
 langchain
 langchain-community
